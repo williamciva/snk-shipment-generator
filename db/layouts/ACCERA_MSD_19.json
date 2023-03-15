@@ -1,0 +1,81 @@
+{
+    "nome": "ACCERA_MSD_19",
+    "payloads": [
+        {
+            "name": "ACC_CADPROD",
+            "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
+            "requestBody": {
+                "param": {
+                    "layout": "14140000",
+                    "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
+                }
+            }
+        },
+        {
+            "name": "ACC_CADSITE",
+            "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
+            "requestBody": {
+                "param": {
+                    "layout": "14200000",
+                    "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
+                }
+            }
+        },
+        {
+            "name": "ACC_POSESTQ",
+            "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
+            "requestBody": {
+                "param": {
+                    "layout": "14300000",
+                    "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
+                }
+            }
+        },
+        {
+            "name": "ACC_SELLOUT",
+            "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
+            "requestBody": {
+                "param": {
+                    "layout": "140400000",
+                    "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI",
+                    "parametros": {
+                        "param": [
+                            {
+                                "codigo": "140402000",
+                                "tipo": "D",
+                                "nome": "DATDt. Neg. Inicial",
+                                "$": ""
+                            },
+                            {
+                                "codigo": "140402000",
+                                "tipo": "D",
+                                "nome": "DATDt. Neg. Final",
+                                "$": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "name": "ACC_PDVS",
+            "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
+            "requestBody": {
+                "param": {
+                    "layout": "14500000",
+                    "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
+                }
+            }
+        },
+        {
+            "name": "ACC_NFS",
+            "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
+            "requestBody": {
+                "param": {
+                    "layout": "14600000",
+                    "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+{
+    "nome": "NEOGRID_18",
+    "payloads": [
+        {
+            "name": "NEOGRID_18",
+            "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
+            "requestBody": {
+                "param": {
+                    "layout": "180000000",
+                    "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI",
+                    "parametros": {
+                        "param": [
+                            {
+                                "codigo": "180200000",
+                                "tipo": "D",
+                                "nome": "DATDt. Neg. Inicial",
+                                "$": ""
+                            },
+                            {
+                                "codigo": "180200000",
+                                "tipo": "D",
+                                "nome": "DATDt. Neg. Final",
+                                "$": ""
+                            }
+                        ]
+                    }
+                }
+            }
+        }
+    ]
+}
