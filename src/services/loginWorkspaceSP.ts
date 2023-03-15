@@ -1,50 +1,60 @@
 import Response from "../models/response";
 import Workspace from "../models/workspace";
+import log from "../utils/log";
 import BApi from "./bapi";
 
-export default async (resourceID: string) => {
-    const payload = {
-        "serviceName": "WorkspaceSP.openItemMenu",
-        "requestBody": {
-            "itemMenu": {
-                "resourceID": resourceID
+export default async (resourceID: string): Promise<Workspace | undefined> => {
+    try {
+        log.addLog("Realizando Login no MGE...");
+
+        const payload = {
+            "serviceName": "WorkspaceSP.openItemMenu",
+            "requestBody": {
+                "itemMenu": {
+                    "resourceID": resourceID
+                }
             }
         }
-    }
 
-    const response: Response = await BApi.post("/mge/service.sbr", '?serviceName=WorkspaceSP.openItemMenu', payload);
-    if (response.getStatus() === "1") {
-        const responseBody= JSON.parse((response.getResponseBody() as any)["json"]["$"]);
+        const response: Response = await BApi.post("/mge/service.sbr", '?serviceName=WorkspaceSP.openItemMenu', payload);
+        if (response.getStatus() === "1") {
+            const responseBody = JSON.parse((response.getResponseBody() as any)["json"]["$"]);
 
-        return new Workspace(
-            responseBody["id"],
-            responseBody["resourceID"],
-            responseBody["descricao"],
-            responseBody["path"],
-            responseBody["onclick"],
-            responseBody["contexto"],
-            responseBody["temFilhos"],
-            responseBody["favorito"],
-            responseBody["visivel"],
-            responseBody["permiteBloquearControle"],
-            responseBody["variacaoDeTela"],
-            responseBody["onlyHtml5"],
-            responseBody["contemVazamentoDeDados"],
-            responseBody["controle"],
-            responseBody["adicional"],
-            responseBody["temPersonalizacao"],
-            responseBody["showInfoTelaPersonalizada"],
-            responseBody["descricaoOrig"],
-            responseBody["controlResourceID"],
-            responseBody["overrideControlResourceID"],
-            getParameterByName("mgeSession", responseBody["onclick"])
-        );
 
-    }
-    else {
-        throw new Error(`Não foi possível trocar para o Workspace
-        resourceID = ${resourceID} \n
-        statusMessage = ${response.getStatusMessage()}`);
+            const workspace = new Workspace(
+                responseBody["id"],
+                responseBody["resourceID"],
+                responseBody["descricao"],
+                responseBody["path"],
+                responseBody["onclick"],
+                responseBody["contexto"],
+                responseBody["temFilhos"],
+                responseBody["favorito"],
+                responseBody["visivel"],
+                responseBody["permiteBloquearControle"],
+                responseBody["variacaoDeTela"],
+                responseBody["onlyHtml5"],
+                responseBody["contemVazamentoDeDados"],
+                responseBody["controle"],
+                responseBody["adicional"],
+                responseBody["temPersonalizacao"],
+                responseBody["showInfoTelaPersonalizada"],
+                responseBody["descricaoOrig"],
+                responseBody["controlResourceID"],
+                responseBody["overrideControlResourceID"],
+                getParameterByName("mgeSession", responseBody["onclick"])
+            );
+
+            log.addLog("Login no MGE Realizado.");
+            return workspace
+
+        }
+        else {
+            throw new Error(`Não foi possível trocar para o Workspace\n* resourceID = ${resourceID}\n* statusMessage = ${response.getStatusMessage()}`);
+        }
+
+    } catch (error) {
+        log.addLogError(error as string);
     }
 
 }

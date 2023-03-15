@@ -1,5 +1,6 @@
 {
     "nome": "ACCERA_AGENER_5",
+    "caminho": "",
     "payloads": [
         {
             "name": "ACC_CADPROD",

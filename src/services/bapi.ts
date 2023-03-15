@@ -1,7 +1,12 @@
 import axios from 'axios';
 import Response from '../models/response';
 import SessionLogin from '../models/sessionLogin';
-import connection from './connection.json';
+const args = require('minimist')(process.argv.slice(2),
+    {
+        alias: {
+            s: 'server'
+        }
+    });
 
 
 export default class BApi {
@@ -19,10 +24,9 @@ export default class BApi {
 
     static post = async (path: string, paramns: string, payload: object) => {
         try {
-            const url = new URL(`${connection.server}${path}${paramns}&outputType=json`)
+            const url = new URL(`${args.server}${path}${paramns}&outputType=json`)
             const request = await axios.post(url.toString(), payload, BApi.getHeaders())
             const response = request.data;
-            console.log(response)
             return new Response(response["status"], response["transactionId"], response["responseBody"], response["statusMessage"]);
         } catch (error) {
             throw new Error(`Não foi possível estabelecer a conexão com o servidor.\n\n${error}`);
@@ -33,7 +37,7 @@ export default class BApi {
     static vizualizarArquivo = async (chaveArquivo: string = "ARQUIVO_REMESSA_EDI") => {
 
         try {
-            const url = new URL(`${connection.server}/mge/visualizadorArquivos.mge?hidemail=S&download=S&chaveArquivo=ARQUIVO_REMESSA_EDI`)
+            const url = new URL(`${args.server}/mge/visualizadorArquivos.mge?hidemail=S&download=S&chaveArquivo=ARQUIVO_REMESSA_EDI`)
             const request = await axios.post(url.toString(), {}, BApi.getHeaders())
             return request.data;
         } catch (error) {

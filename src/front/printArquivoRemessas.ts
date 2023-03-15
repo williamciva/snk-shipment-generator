@@ -1,7 +1,7 @@
-import CadastroArquivoRemessa from "./models/cadastroArquivoRemessa";
-import BApi from "./services/bapi";
-import Login from "./services/login";
-import loginWorkspaceSP from "./services/loginWorkspaceSP";
+import CadastroArquivoRemessa from "../models/cadastroArquivoRemessa";
+import BApi from "../services/bapi";
+import Login from "../services/login";
+import loginWorkspaceSP from "../services/loginWorkspaceSP";
 import prompts, { Choice } from 'prompts';
 
 let listArquivos = Array<CadastroArquivoRemessa>();
