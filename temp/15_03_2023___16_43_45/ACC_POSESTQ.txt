@@ -1,3 +1,0 @@
-H;07536553000102    ;20230315
-V;07536553000102    ;INTERSUL DISTR.DE PROD.VETERINARIOS LTDA                    ;RS;NOVA ALVORADA                                               ;CENTRO                                                      ;95985000;A
-E
