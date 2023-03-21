@@ -1,6 +1,7 @@
 import axios from 'axios';
 import Response from '../models/response';
 import SessionLogin from '../models/sessionLogin';
+import Log from '../utils/log';
 const args = require('minimist')(process.argv.slice(2),
     {
         alias: {
@@ -29,20 +30,19 @@ export default class BApi {
             const response = request.data;
             return new Response(response["status"], response["transactionId"], response["responseBody"], response["statusMessage"]);
         } catch (error) {
-            throw new Error(`Não foi possível estabelecer a conexão com o servidor.\n\n${error}`);
-
+            Log.addLogError(`${error}`);
+            throw new Error("Não foi possível estabelecer a conexão com o servidor.");
         }
     }
 
     static vizualizarArquivo = async (chaveArquivo: string = "ARQUIVO_REMESSA_EDI") => {
-
         try {
             const url = new URL(`${args.server}/mge/visualizadorArquivos.mge?hidemail=S&download=S&chaveArquivo=ARQUIVO_REMESSA_EDI`)
             const request = await axios.post(url.toString(), {}, BApi.getHeaders())
             return request.data;
         } catch (error) {
-            throw new Error(`Não foi possível estabelecer a conexão com o servidor.\n\n${error}`);
-
+            Log.addLogError(`${error}`);
+            throw new Error("Não foi possível estabelecer a conexão com o servidor.");
         }
     }
 

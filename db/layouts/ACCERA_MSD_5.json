@@ -1,5 +1,6 @@
 {
     "nome": "ACCERA_MSD_5",
+    "caminho": "Z:\\teste\\INTERSULMSD",
     "payloads": [
         {
             "name": "ACC_CADPROD",

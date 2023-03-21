@@ -1,5 +1,6 @@
 {
     "nome": "ACCERA_MSD_19",
+    "caminho": "Z:\\teste\\INTERSULPR",
     "payloads": [
         {
             "name": "ACC_CADPROD",

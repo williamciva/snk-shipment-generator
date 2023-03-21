@@ -7,12 +7,12 @@ import loginWorkspaceSP from './services/loginWorkspaceSP';
 import Workspace from './models/workspace';
 import Log from './utils/log';
 import ShipmentFile from './saveShipmentFile';
-import { config } from 'dotenv'
+
 
 export default async () => {
-    config();
-    new Log();
-    new ShipmentFile();
+    Log.createDefaultFolders();
+    ShipmentFile.createDefaultPathShipmentFile();
+
 
     try {
         await Login.login();
@@ -22,28 +22,34 @@ export default async () => {
 
         const layouts = fs.readdirSync(`${process.env.LOCAL_LAYOUTS}`);
 
-
-        layouts.forEach(async (documentJson) => {
+        for (const documentJson of layouts) {
             let ataulLayout = path.join(`${process.env.LOCAL_LAYOUTS}`, documentJson)
 
             let layoutObject = new Object(fs.readFileSync(ataulLayout));
             let layoutJson = JSON.parse(layoutObject.toString());
 
-            (layoutJson["payloads"] as []).forEach(async (payload) => {
-                if (await gerarArquivoRemessa(payload as object, mgeSession as string)) {
+            try {
+                for (const payload of layoutJson["payloads"] as []) {
+                    if (await gerarArquivoRemessa(payload as object, mgeSession as string)) {
 
-                    let chaveArq: string | undefined = undefined;
-                    try { chaveArq = payload["requestBody"]["param"]["chaveSessaoArquivo"]; } catch (error) { }
+                        let chaveArq: string | undefined = undefined;
+                        try { chaveArq = payload["requestBody"]["param"]["chaveSessaoArquivo"]; } catch (error) { }
 
-                    let documentTxt = await BApi.vizualizarArquivo(chaveArq);
+                        let documentTxt = await BApi.vizualizarArquivo(chaveArq);
 
-                    const nameFile = payload["name"]
-                    
-                    ShipmentFile.saveShipmentFile(JSON.stringify(layoutJson), nameFile, documentTxt);
-                };
-            })
-        })
+                        const nameFile = payload["name"]
 
+                        try {
+                            ShipmentFile.saveShipmentFile(JSON.stringify(layoutJson), nameFile, documentTxt);
+                        } catch (error) {
+                            Log.addLogError(error as string);
+                        }
+                    };
+                }
+            } catch (error) {
+                Log.addLogError(error as string);
+            }
+        }
     } catch (error) {
         Log.addLogError(error as string);
     }

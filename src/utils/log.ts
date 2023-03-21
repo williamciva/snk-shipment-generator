@@ -13,24 +13,16 @@ const args = require('minimist')(process.argv.slice(2),
 
 
 export default class Log {
+    public static getFolderLogs = (): string => {
+        config(); return `${process.env.LOCAL_LOGS}`
+    }
+
     private static dtExec: string = new Date().toLocaleDateString().split("/").join("_");
     private static logFile: string = `---[ Sankhya Shipment Generator Log - by williamciva ]---`;
     private static logErrorFile: string = `---[ Sankhya Shipment Generator Log Error - by williamciva ]---`;
-    private static logPath: string;
-    private static folderLogs: string;
-    private static folderLogDay: string;
-    private static folderLogErros: string;
-
-
-    constructor() {
-        config();
-        Log.logPath = `${process.env.LOCAL_LOGS}`;
-        Log.folderLogs = Log.logPath
-        Log.folderLogDay = path.join(Log.folderLogs, Log.dtExec)
-        Log.folderLogErros = path.join(Log.folderLogDay, "error")
-
-        this.createDefaultFolders();
-    }
+    private static folderLogs: string = Log.getFolderLogs();
+    private static folderLogDay: string = path.join(Log.folderLogs, Log.dtExec);
+    private static folderLogErros: string = path.join(Log.folderLogDay, "error");
 
     public static addLog = (msg: string) => {
         let referenceDate = `[ ${new Date().toLocaleString()} ] ->`
@@ -47,16 +39,16 @@ export default class Log {
     }
 
     public static saveLogs = () => {
-
         try {
-            fs.writeFileSync(Log.folderLogDay, Log.logFile)
-            fs.writeFileSync(Log.folderLogErros, Log.logErrorFile)
+            const hora_exec = new Date().toLocaleTimeString().split(":").join("_");
+            fs.writeFileSync(path.join(Log.folderLogDay, `${hora_exec}.log`), Log.logFile)
+            fs.writeFileSync(path.join(Log.folderLogErros, `${hora_exec}.log`), Log.logErrorFile)
         } catch (error) {
             console.log(error)
         }
     }
 
-    private createDefaultFolders = () => {
+    public static createDefaultFolders = () => {
         const createFolderLogs = () => fs.mkdir(Log.folderLogs, () => { })
         const createFolderLogDay = () => fs.mkdir(Log.folderLogDay, () => { })
         const createFolderLogErros = () => fs.mkdir(Log.folderLogErros, () => { })

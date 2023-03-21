@@ -1,5 +1,6 @@
 import Response from "../models/response";
 import Workspace from "../models/workspace";
+import Log from "../utils/log";
 import log from "../utils/log";
 import BApi from "./bapi";
 
@@ -50,11 +51,13 @@ export default async (resourceID: string): Promise<Workspace | undefined> => {
 
         }
         else {
-            throw new Error(`Não foi possível trocar para o Workspace\n* resourceID = ${resourceID}\n* statusMessage = ${response.getStatusMessage()}`);
+            const erro = `Não foi possível trocar para o Workspace\n* resourceID = ${resourceID}\n* statusMessage = ${response.getStatusMessage()}`;
+            throw new Error(erro);
         }
 
     } catch (error) {
         log.addLogError(error as string);
+        throw new Error("Ocorreram erros durante o login no MGE...\nNão foi possível completa-lo!");
     }
 
 }
