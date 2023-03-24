@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import Log from './utils/log';
+import Log from '../utils/log';
 import { config } from 'dotenv';
 
 export default class ShipmentFile {

@@ -44,12 +44,11 @@ export default class Login extends SessionLogin {
             }
 
             else {
-                const erro = `Não foi possível fazer Login no ERP.\nVerifique o usuário e senha e tente novamente.`;
-                throw new Error(erro);
+                throw new Error(response.getStatusMessage());
             }
         } catch (error) {
             log.addLogError(`${error}`)
-            throw new Error("Ocorreram erros durante o login...\nNão foi possível completa-lo!");
+            throw new Error("Ocorreram erros durante o login...");
         }
     }
 }

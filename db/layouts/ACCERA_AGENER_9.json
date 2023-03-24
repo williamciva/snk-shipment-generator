@@ -7,7 +7,7 @@
             "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
             "requestBody": {
                 "param": {
-                    "layout": "12120000",
+                    "layout": "120100000",
                     "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
                 }
             }
@@ -17,7 +17,7 @@
             "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
             "requestBody": {
                 "param": {
-                    "layout": "12200000",
+                    "layout": "120200000",
                     "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
                 }
             }
@@ -27,7 +27,7 @@
             "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
             "requestBody": {
                 "param": {
-                    "layout": "12300000",
+                    "layout": "120300000",
                     "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
                 }
             }
@@ -44,12 +44,12 @@
                             "codigo": "120402000",
                             "tipo": "D",
                             "nome": "DATDt. Neg. Inicial",
-                            "$": ""
+                            "$": "`01/${new Date().getMonth().toString().length == 2 ? new Date().getMonth() : '0'+new Date().getMonth()}/${new Date().getFullYear()}`"
                         }, {
                             "codigo": "120402000",
                             "tipo": "D",
                             "nome": "DATDt. Neg. Final",
-                            "$": ""
+                            "$": "new Date().toLocaleDateString()"
                         }]
                     }
                 }
@@ -60,7 +60,7 @@
             "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
             "requestBody": {
                 "param": {
-                    "layout": "12500000",
+                    "layout": "120500000",
                     "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
                 }
             }
@@ -70,7 +70,7 @@
             "serviceName": "IntercambioEletronicoDadosSP.gerarArquivoRemessa",
             "requestBody": {
                 "param": {
-                    "layout": "12600000",
+                    "layout": "120600000",
                     "chaveSessaoArquivo": "ARQUIVO_REMESSA_EDI"
                 }
             }

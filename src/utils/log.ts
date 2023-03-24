@@ -19,10 +19,8 @@ export default class Log {
 
     private static dtExec: string = new Date().toLocaleDateString().split("/").join("_");
     private static logFile: string = `---[ Sankhya Shipment Generator Log - by williamciva ]---`;
-    private static logErrorFile: string = `---[ Sankhya Shipment Generator Log Error - by williamciva ]---`;
     private static folderLogs: string = Log.getFolderLogs();
     private static folderLogDay: string = path.join(Log.folderLogs, Log.dtExec);
-    private static folderLogErros: string = path.join(Log.folderLogDay, "error");
 
     public static addLog = (msg: string) => {
         let referenceDate = `[ ${new Date().toLocaleString()} ] ->`
@@ -34,7 +32,7 @@ export default class Log {
     public static addLogError = (error: string) => {
         let referenceDate = `[ ${new Date().toLocaleString()} ] ->`
         let tempLog = `\n${referenceDate} ${error}`;
-        args.log ? Log.logErrorFile += tempLog : null;
+        args.log ? Log.logFile += tempLog : null;
         args.verbose ? console.log(`${chalk.redBright(referenceDate)}\n${boxen(chalk.red(error), { padding: 1 })}\n\n`) : null;
     }
 
@@ -42,7 +40,6 @@ export default class Log {
         try {
             const hora_exec = new Date().toLocaleTimeString().split(":").join("_");
             fs.writeFileSync(path.join(Log.folderLogDay, `${hora_exec}.log`), Log.logFile)
-            fs.writeFileSync(path.join(Log.folderLogErros, `${hora_exec}.log`), Log.logErrorFile)
         } catch (error) {
             console.log(error)
         }
@@ -51,11 +48,9 @@ export default class Log {
     public static createDefaultFolders = () => {
         const createFolderLogs = () => fs.mkdir(Log.folderLogs, () => { })
         const createFolderLogDay = () => fs.mkdir(Log.folderLogDay, () => { })
-        const createFolderLogErros = () => fs.mkdir(Log.folderLogErros, () => { })
 
         createFolderLogs();
         createFolderLogDay();
-        createFolderLogErros();
     }
 }
 

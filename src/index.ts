@@ -1,4 +1,4 @@
-import gerarArquivo from "./gerarArquivo"
+import gerarArquivo from "./ShipmentFile/gerarArquivo"
 
 console.clear();
 
