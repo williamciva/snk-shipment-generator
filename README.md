@@ -14,7 +14,7 @@ A partir dessas instruções você conseguirá obter uma cópia atual do reposit
 
 ## **📋 Pré-requisitos**
 
-Para rodas esse projeto em sua máquina será necessário ter instalado em sua máquina algumas ferramentas.
+Para rodar esse projeto em sua máquina será necessário ter instalado algumas ferramentas.
 
 - [Git](https://git-scm.com/downloads)
 - [Node JS](https://nodejs.org/en/download)
