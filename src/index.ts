@@ -1,5 +1,3 @@
-import gerarArquivo from "./ShipmentFile/gerarArquivo"
+import { home } from './views/'
 
-console.clear();
-
-(async () => await gerarArquivo())();
+home();
