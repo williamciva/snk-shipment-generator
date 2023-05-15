@@ -1,7 +1,7 @@
-import Response from "../models/response";
-import Workspace from "../models/workspace";
-import Log from "../utils/log";
-import log from "../utils/log";
+import Response from "../../models/response";
+import Workspace from "../../models/workspace";
+import Log from "../../utils/log";
+import log from "../../utils/log";
 import BApi from "./bapi";
 
 export default async (resourceID: string): Promise<Workspace | undefined> => {

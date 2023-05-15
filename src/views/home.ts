@@ -1,12 +1,8 @@
 import boxen from 'boxen';
 import inquirer from 'inquirer';
+import { Choice } from '@/core/types/choice';
+import { ChoicesController } from '@/core/choicesController';
 
-export const home = () => {
-    console.log(
-        boxen('Bem Vindo ao Sankhya Gerador de Arquivos de Remessa', { padding: 1 })
-    )
-    quests();    
-}
 
 const quests = () => {
     inquirer
@@ -15,17 +11,13 @@ const quests = () => {
                 name: "choice",
                 message: "O que deseja fazer?",
                 type: "list",
-                choices: [
-                    "Listar arquivos agendados",
-                    "Agendar um novo arquivo",
-                    "Listar todos os arquivos",
-                    "Executar um agendamento",
-                    "Executar todos os agendamentos",
-                ]
+                choices: prompts.getChoices(),
             }
         ])
         .then((answers) => {
-            (choicesMap as any)[answers['choice']](answers)
+            const choised = answers.choice
+            const prompt = prompts.findChoice(choised);
+            prompt?.onChoised(choised);
         })
         .catch((error) => {
             if (error.isTtyError) {
@@ -36,10 +28,19 @@ const quests = () => {
         });
 }
 
-const choicesMap: Object = {
-    "Listar arquivos agendados": (answers: {}) => console.log(answers as any['choice']),
-    "Agendar um novo arquivo": (answers: {}) => console.log(answers as any['choice']),
-    "Listar todos os arquivos": (answers: {}) => console.log(answers as any['choice']),
-    "Executar um agendamento": (answers: {}) => console.log(answers as any['choice']),
-    "Executar todos os agendamentos": (answers: {}) => console.log(answers as any['choice']),
+
+const prompts: ChoicesController = new ChoicesController([
+    new Choice("Listar arquivos agendados", (answer: string) => console.log(answer)),
+    new Choice("Agendar um novo arquivo", (answer: string) => console.log(answer)),
+    new Choice("Listar todos os arquivos", (answer: string) => console.log(answer)),
+    new Choice("Executar um agendamento", (answer: string) => console.log(answer)),
+    new Choice("Executar todos os agendamentos", (answer: string) => console.log(answer)),
+])
+
+
+export const home = () => {
+    console.log(
+        boxen('Bem Vindo ao Sankhya Gerador de Arquivos de Remessa', { padding: 1 })
+    )
+    quests();
 }

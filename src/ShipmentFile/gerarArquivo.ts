@@ -3,7 +3,7 @@ import path from 'path';
 import BApi from '../services/bapi';
 import gerarArquivoRemessa from '../services/gerarArquivoRemessa';
 import Login from '../services/login';
-import loginWorkspaceSP from '../services/loginWorkspaceSP';
+import loginWorkspaceSP from '../services/sankhya/loginWorkspaceSP';
 import Workspace from '../models/workspace';
 import Log from '../utils/log';
 import ShipmentFile from './saveShipmentFile';

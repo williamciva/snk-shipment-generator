@@ -1,3 +1,3 @@
-import { home } from './views/'
+import './config/module-alias'
 
-home();
+import './core'

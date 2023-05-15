@@ -21,7 +21,9 @@
     "@types/boxen": "3.0.1",
     "@types/chalk": "2.2.0",
     "@types/inquirer": "9.0.3",
+    "@types/module-alias": "2.0.1",
     "@types/node": "18.15.0",
+    "@types/sqlite3": "3.1.8",
     "copyfiles": "2.4.1",
     "nodemon": "2.0.21",
     "pkg": "5.8.1",
@@ -36,7 +38,9 @@
     "chalk": "2.4",
     "dotenv": "16.0.3",
     "inquirer": "8.2.5",
-    "minimist": "1.2.8"
+    "minimist": "1.2.8",
+    "module-alias": "2.2.2",
+    "sqlite3": "5.1.6"
   },
   "pkg": {
     "scripts": "build/**/*.js",

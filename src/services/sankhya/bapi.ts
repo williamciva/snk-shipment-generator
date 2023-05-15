@@ -1,7 +1,7 @@
 import axios from 'axios';
-import Response from '../models/response';
-import SessionLogin from '../models/sessionLogin';
-import Log from '../utils/log';
+import Response from '@/models/response';
+import SessionLogin from '@/models/sessionLogin';
+import Log from '@/utils/log';
 const args = require('minimist')(process.argv.slice(2),
     {
         alias: {
